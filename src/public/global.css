@@ -1,0 +1,32 @@
+.theater-mode {
+  &#main-container {
+    padding: 0;
+  }
+
+  #main {
+    padding: 0 !important;
+  }
+
+  #video-player-row,
+  #video-player-container {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+  }
+
+  .video-js video.vjs-tech {
+    position: relative;
+  }
+
+  [data-testid="tabs-root"] {
+    z-index: -1 !important;
+  }
+
+  #vjs_video_3 {
+    border-radius: 0;
+  }
+
+  #video-item-title-and-save-note {
+    padding-inline: var(--cds-spacing-200);
+  }
+}
