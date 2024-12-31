@@ -1,19 +1,22 @@
-import {TheaterButtonSvg} from "./assets/svg.ts";
-import {waitForElement} from "./utils.ts";
+import { TheaterButtonSvg } from "./assets/svg.ts";
+import { getDefaultState, waitForElement } from "./utils.ts";
 const SCROLL_MARGIN_PX = 16;
 
 async function main(): Promise<void> {
+  const defaultState = await getDefaultState();
   const bodyWrapSelector = ".rc-LegacyDataFetch";
   const bodyWrapEl = await waitForElement(bodyWrapSelector);
 
   // Observe change of bodyWrapEl to attach the button for every page navigation
-  const bodyWrapObserver = new MutationObserver(addTogglebutton);
+  const bodyWrapObserver = new MutationObserver(() =>
+    addTheaterButton(defaultState)
+  );
   if (bodyWrapEl) {
-    bodyWrapObserver.observe(bodyWrapEl, {childList: true});
+    bodyWrapObserver.observe(bodyWrapEl, { childList: true });
   }
 }
 
-async function addTogglebutton(): Promise<void> {
+async function addTheaterButton(startState: boolean): Promise<void> {
   // Wait until all necessary elements become available
   const [mainContainerEl, toolbarEl] = (await Promise.all([
     waitForElement("#main-container"),
@@ -21,16 +24,35 @@ async function addTogglebutton(): Promise<void> {
   ])) as (HTMLElement | null)[];
 
   // Current state
-  let isTheaterMode = false;
+  let isTheaterMode = startState;
+  if (isTheaterMode && mainContainerEl) {
+    mainContainerEl.classList.add("theater-mode");
+  }
 
   // Add theater mode button
+  // Button element
   const buttonEl = document.createElement("button");
+  buttonEl.className = "tm-button";
   buttonEl.type = "button";
   buttonEl.innerHTML = TheaterButtonSvg;
   buttonEl.onclick = () => {
-    mainContainerEl?.classList.toggle("theater-mode");
+    if (isTheaterMode) {
+      if (mainContainerEl?.classList.contains("theater-mode")) {
+        mainContainerEl?.classList.remove("theater-mode");
+      }
+    } else {
+      mainContainerEl?.classList.add("theater-mode");
+    }
     isTheaterMode = !isTheaterMode;
   };
+
+  // Tooltip element
+  const tooltipEl = document.createElement("span");
+  tooltipEl.className = "tm-tooltip";
+  tooltipEl.textContent = "Toggle Theater Mode";
+  buttonEl.append(tooltipEl);
+
+  // Button container element
   const buttonContainerEl = document.createElement("span");
   buttonContainerEl.className = "rc-TooltipWrapper";
   buttonContainerEl.append(buttonEl);

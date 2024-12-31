@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build --emptyOutDir"
+    "build": " tsc && vite build --emptyOutDir"
   },
   "keywords": [],
   "author": "Yohei Yamasaki",
@@ -12,6 +12,7 @@
   "description": "Add Theater mode of video in Coursera.",
   "devDependencies": {
     "@types/chrome": "^0.0.287",
+    "prettier": "^3.4.2",
     "typescript": "^5.7.2",
     "vite": "^6.0.6"
   }

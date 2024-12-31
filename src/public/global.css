@@ -30,3 +30,25 @@
     padding-inline: var(--cds-spacing-200);
   }
 }
+
+.tm-button {
+  position: relative;
+}
+
+.tm-tooltip {
+  width: fit-content;
+  min-width: 120px;
+  height: auto;
+  position: absolute;
+  top: -180%;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: none;
+}
+
+.tm-button:hover .tm-tooltip {
+  display: inline-block;
+}

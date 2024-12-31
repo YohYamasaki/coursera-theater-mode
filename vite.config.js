@@ -8,10 +8,16 @@ export default defineConfig((opt) => {
       outDir: "../dist",
       rollupOptions: {
         input: {
-          index: resolve(__dirname, "src/index.ts"),
+          main: resolve(__dirname, "src/main.ts"),
+          popup: resolve(__dirname, "src/popup.ts"),
         },
         output: {
-          entryFileNames: "[name].js",
+          entryFileNames: (chunk) => {
+            if (chunk.name === "popup") {
+              return "popup.js";
+            }
+            return "[name].js";
+          },
         },
       },
     },

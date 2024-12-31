@@ -22,17 +22,17 @@ export async function waitForElement(
   });
 }
 
-// export function detectElementChange(selector: string) {
-//   const observer = new MutationObserver((mutation) => {
-//     console.log(mutation);
-//   });
-
-//   observer.observe(document.querySelector("#main-container")!, {
-//     attributes: true,
-//     characterData: true,
-//     childList: true,
-//     subtree: true,
-//     attributeOldValue: true,
-//     characterDataOldValue: true,
-//   });
-// }
+/**
+ * Get user set default state from chrome storage.
+ * @returns default state user setting
+ */
+export async function getDefaultState(): Promise<boolean> {
+  // init the default state as true
+  const data = await chrome.storage.local.get("defaultState");
+  let defaultState: boolean | undefined = data?.defaultState;
+  if (defaultState === undefined) {
+    chrome.storage.local.set({ defaultState: true });
+    defaultState = true;
+  }
+  return defaultState;
+}
