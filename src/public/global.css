@@ -22,8 +22,8 @@
     z-index: -1 !important;
   }
 
-  #vjs_video_3 {
-    border-radius: 0;
+  [id^="vjs_video"][data-vjs-player="true"] {
+    border-radius: 0 !important;
   }
 
   #video-item-title-and-save-note {
