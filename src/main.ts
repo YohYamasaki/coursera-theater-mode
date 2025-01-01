@@ -29,6 +29,10 @@ async function addTheaterButton(startState: boolean): Promise<void> {
     mainContainerEl.classList.add("theater-mode");
   }
 
+  // Remove old theater mode button
+  const oldWrapEl = document.querySelector(".rc-TooltipWrapper.tm-wrapper");
+  oldWrapEl?.remove();
+
   // Add theater mode button
   // Button element
   const buttonEl = document.createElement("button");
@@ -54,7 +58,7 @@ async function addTheaterButton(startState: boolean): Promise<void> {
 
   // Button container element
   const buttonContainerEl = document.createElement("span");
-  buttonContainerEl.className = "rc-TooltipWrapper";
+  buttonContainerEl.className = "rc-TooltipWrapper tm-wrapper";
   buttonContainerEl.append(buttonEl);
   toolbarEl?.append(buttonContainerEl);
 

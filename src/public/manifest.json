@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Coursera Theater Mode",
   "description": "Add theater mode to the Coursera video player.",
-  "version": "1.0",
+  "version": "1.0.1",
   "permissions": ["storage"],
   "content_scripts": [
     {
